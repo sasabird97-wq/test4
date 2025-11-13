@@ -1,42 +1,39 @@
 [
-{
-  "id": 1,
-  "lat": 40.6607,
-  "lng": 14.4166,
-  "title": "Piazza Umberto I",
-  "foundBy": "Juventude Bonea",
-  "img": "images/p1.jpg",
-  "foto": "si"
-},
   {
-  "id": 2,
-  "lat": 40.6607,
-  "lng": 14.4359,
-  "title": "Piazza Umberto I",
-  "foundBy": "Juventude Bonea",
-  "img": "images/p2.jpg",
-  "foto": "no"
-},
-
-{
-  "id": 3,
-  "lat": 40.6643,
-  "lng": 14.4259,
-  "title": "Piazza Umberto I",
-  "foundBy": "Falò",
-  "img": "images/p3.jpg",
-  "foto": "si"
-},
-
-{
-  "id": 4,
-  "lat": 40.6651,
-  "lng": 14.4159,
-  "title": "Piazza Umberto I",
-  "foundBy": "Hunters",
-  "img": "images/p4.jpg",
-  "foto": "no"
-},
-
-
+    "id": 1,
+    "lat": 40.6607,
+    "lng": 14.4166,
+    "title": "Piazza Umberto I",
+    "foundBy": "Juventude Bonea",
+    "img": "images/p1.jpg",
+    "foto": "si"
+  },
+  {
+    "id": 2,
+    "lat": 40.6607,
+    "lng": 14.4359,
+    "title": "Piazza Umberto I",
+    "foundBy": "Juventude Bonea",
+    "img": "images/p2.jpg",
+    "foto": "no"
+  },
+  {
+    "id": 3,
+    "lat": 40.6643,
+    "lng": 14.4259,
+    "title": "Piazza Umberto I",
+    "foundBy": "Falò",
+    "img": "images/p3.jpg",
+    "foto": "si"
+  },
+  {
+    "id": 4,
+    "lat": 40.6651,
+    "lng": 14.4159,
+    "title": "Piazza Umberto I",
+    "foundBy": "Hunters",
+    "img": "images/p4.jpg",
+    "foto": "no"
+  }
 ]
+
