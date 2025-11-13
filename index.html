@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mappa Vico Equense — Emoji + Classifica + Foto + Countdown</title>
+  <title>Mappa Vico Equense — Emoji + Classifica PRO + Foto</title>
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet"
@@ -62,20 +62,6 @@
     }
     header.card > *{position:relative; z-index:1;}
 
-    /* Countdown */
-    .countdown{display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
-    .countdown .label{font-weight:600; color:var(--text-muted);}
-    .countdown .grid{display:flex; gap:10px; align-items:stretch}
-    .cd-box{
-      display:flex; flex-direction:column; alignments:center; justify-content:center;
-      min-width:74px; padding:10px 12px; border-radius:14px;
-      background:var(--card-soft);
-      border:1px solid rgba(148,163,184,.4);
-      text-align:center;
-    }
-    .cd-num{font-size:22px; font-variant-numeric:tabular-nums; font-weight:800; color:var(--accent);}
-    .cd-unit{font-size:11px; opacity:.75; color:var(--text-muted); margin-top:2px}
-
     /* Layout 2 colonne */
     .grid{
       display:grid; grid-template-columns: 1.2fr .8fr;
@@ -118,6 +104,7 @@
       font-variant-numeric:tabular-nums;
       font-weight:700;
       color:var(--accent-soft);
+      text-align:right;
     }
 
     .btn{
@@ -161,17 +148,9 @@
   <div class="wrap">
     <header class="card">
       <div style="display:flex; align-items:center; gap:10px">
-        <h1 style="font-size:18px; margin:0">🪐 Guida Galattica per Vicacciatori — Caccia alle Capsule </h1>
+        <h1 style="font-size:18px; margin:0">🪐 Guida galattica per vicacciatori — Mappa Vico Equense</h1>
       </div>
-      <div class="countdown" id="countdown" data-target="2026-01-01T00:00:00+01:00">
-        <span class="label">⏳ Scadenza tra:</span>
-        <div class="grid">
-          <div class="cd-box"><div class="cd-num" id="cd-days">--</div><div class="cd-unit">giorni</div></div>
-          <div class="cd-box"><div class="cd-num" id="cd-hours">--</div><div class="cd-unit">ore</div></div>
-          <div class="cd-box"><div class="cd-num" id="cd-mins">--</div><div class="cd-unit">min</div></div>
-          <div class="cd-box"><div class="cd-num" id="cd-secs">--</div><div class="cd-unit">sec</div></div>
-        </div>
-      </div>
+      <!-- Timer rimosso -->
     </header>
 
     <div class="grid">
@@ -216,33 +195,6 @@
     crossorigin=""></script>
 
   <script>
-  // ===== COUNTDOWN =====
-  (function initCountdown(){
-    const el = document.getElementById('countdown');
-    if(!el) return;
-    const target = new Date(el.dataset.target || '');
-    const daysEl = document.getElementById('cd-days');
-    const hrsEl  = document.getElementById('cd-hours');
-    const minEl  = document.getElementById('cd-mins');
-    const secEl  = document.getElementById('cd-secs');
-    const two = n => String(n).padStart(2,'0');
-    function tick(){
-      const diff = target - new Date();
-      if (isNaN(target.getTime())) { daysEl.textContent = hrsEl.textContent = minEl.textContent = secEl.textContent = '--'; return; }
-      if (diff <= 0) {
-        daysEl.textContent = hrsEl.textContent = minEl.textContent = secEl.textContent = '00';
-        el.querySelector('.label').textContent = 'Tempo scaduto!';
-        return;
-      }
-      const d = Math.floor(diff/86400000);
-      const h = Math.floor((diff%86400000)/3600000);
-      const m = Math.floor((diff%3600000)/60000);
-      const s = Math.floor((diff%60000)/1000);
-      daysEl.textContent = two(d); hrsEl.textContent = two(h); minEl.textContent = two(m); secEl.textContent = two(s);
-    }
-    tick(); setInterval(tick, 1000);
-  })();
-
   document.addEventListener('DOMContentLoaded', async () => {
     // ===== MAPPA =====
     const map = L.map('map').setView([40.660, 14.420], 13);
@@ -302,19 +254,39 @@
       marker.on('click', () => showPhoto(p));
     });
 
-    // ===== Classifica =====
-    const totals = {};
-    let foundCount = 0;
+    // ===== Classifica PRO (capsule + bonus foto) =====
+    const stats = {};   // teamKey -> {capsule, foto, punti}
+    let foundCount = 0; // capsule totali trovate
+
+    function hasFotoBonus(p){
+      const v = (p.foto || '').toString().trim().toLowerCase();
+      return v === 'si';
+    }
+
     pins.forEach(p => {
-      if(p.foundBy){
+      if (p.foundBy) {
         foundCount++;
-        const t = String(p.foundBy).trim().toLowerCase();
-        totals[t] = (totals[t] || 0) + 1;
+
+        const key = String(p.foundBy).trim().toLowerCase();
+
+        if (!stats[key]) {
+          stats[key] = { capsule: 0, foto: 0, punti: 0 };
+        }
+
+        // 1 punto per la capsula trovata
+        stats[key].capsule += 1;
+
+        // +1 se hanno fatto la foto
+        if (hasFotoBonus(p)) {
+          stats[key].foto += 1;
+        }
+
+        stats[key].punti = stats[key].capsule + stats[key].foto;
       }
     });
 
     renderSummary(foundCount, pins.length);
-    renderLeaderboard(totals);
+    renderLeaderboard(stats);
     renderLegend();
 
     // ===== Riquadro foto =====
@@ -337,7 +309,7 @@
 
     // ===== Helpers =====
     function renderSummary(found, total){
-      document.getElementById('summary').textContent = `Trovati: ${found} / ${total}`;
+      document.getElementById('summary').textContent = `Capsule trovate: ${found} / ${total}`;
     }
 
     function renderLegend(){
@@ -350,28 +322,44 @@
       });
     }
 
-    function renderLeaderboard(counts){
+    function renderLeaderboard(stats){
       const list = document.getElementById('leaderboard');
       list.innerHTML = '';
-      const items = Object.entries(counts)
-        .map(([team, count]) => ({team, count}))
-        .sort((a,b) => b.count - a.count || a.team.localeCompare(b.team, 'it'));
-      if(items.length === 0){
+
+      const items = Object.entries(stats)
+        .map(([teamKey, s]) => ({
+          teamKey,
+          capsule: s.capsule,
+          foto: s.foto,
+          punti: s.punti
+        }))
+        .sort((a,b) => b.punti - a.punti || a.teamKey.localeCompare(b.teamKey, 'it'));
+
+      if (items.length === 0) {
         const li = document.createElement('li');
         li.textContent = 'Nessun ritrovamento registrato';
         list.appendChild(li);
         return;
       }
-      items.forEach(({team, count}) => {
-        const color = TEAM_COLORS[team] || '#555';
-        const emoji = TEAM_EMOJIS[team] || '📍';
-        const pretty = TEAM_NAME[team] || team;
+
+      items.forEach(({teamKey, capsule, foto, punti}) => {
+        const color  = TEAM_COLORS[teamKey] || '#555';
+        const emoji  = TEAM_EMOJIS[teamKey] || '📍';
+        const pretty = TEAM_NAME[teamKey] || teamKey;
+
         const li = document.createElement('li');
         li.innerHTML = `
           <span class="badge">
-            <span class="dot" style="background:${color}"></span> ${escapeHtml(emoji)} ${escapeHtml(pretty)}
+            <span class="dot" style="background:${color}"></span>
+            ${escapeHtml(emoji)} ${escapeHtml(pretty)}
           </span>
-          <span class="count">${count}</span>
+          <span class="count">
+            ${punti} pt
+            <br>
+            <small style="font-weight:400; color:var(--text-muted); font-size:11px;">
+              ${capsule} capsula/e + ${foto} foto
+            </small>
+          </span>
         `;
         list.appendChild(li);
       });
