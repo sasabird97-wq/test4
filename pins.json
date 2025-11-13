@@ -4,7 +4,6 @@
   "lat": 40.6607,
   "lng": 14.4166,
   "title": "Piazza Umberto I",
-  "desc": "Punto d’incontro",
   "foundBy": "Juventude Bonea",
   "img": "images/p1.jpg",
   "foto": "si"
@@ -15,7 +14,6 @@
   "lat": 40.6607,
   "lng": 14.4359,
   "title": "Piazza Umberto I",
-  "desc": "Punto d’incontro",
   "foundBy": "Juventude Bonea",
   "img": "images/p2.jpg",
   "foto": "no"
@@ -26,7 +24,6 @@
   "lat": 40.6643,
   "lng": 14.4259,
   "title": "Piazza Umberto I",
-  "desc": "Punto d’incontro",
   "foundBy": "Falò",
   "img": "images/p3.jpg",
   "foto": "si"
@@ -37,7 +34,6 @@
   "lat": 40.6651,
   "lng": 14.4159,
   "title": "Piazza Umberto I",
-  "desc": "Punto d’incontro",
   "foundBy": "Hunters",
   "img": "images/p4.jpg",
   "foto": "no"
