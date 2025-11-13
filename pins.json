@@ -7,7 +7,7 @@
   "foundBy": "Juventude Bonea",
   "img": "images/p1.jpg",
   "foto": "si"
-}
+},
   {
   "id": 2,
   "lat": 40.6607,
@@ -16,7 +16,7 @@
   "foundBy": "Juventude Bonea",
   "img": "images/p2.jpg",
   "foto": "no"
-}
+},
 
 {
   "id": 3,
@@ -26,7 +26,7 @@
   "foundBy": "Falò",
   "img": "images/p3.jpg",
   "foto": "si"
-}
+},
 
 {
   "id": 4,
@@ -36,7 +36,7 @@
   "foundBy": "Hunters",
   "img": "images/p4.jpg",
   "foto": "no"
-}
+},
 
 
 ]
