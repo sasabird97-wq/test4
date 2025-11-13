@@ -13,75 +13,185 @@
 
   <style>
     :root{
-      --bg:#f3f5f8;
-      --card:#ffffff;
-      --shadow:0 12px 32px rgba(0,0,0,.08);
+      /* QUI puoi cambiare facilmente la palette per farla combaciare al manifesto */
+      --bg:#050816;         /* sfondo pagina (molto scuro, spaziale)  */
+      --card:#0b1120;       /* sfondo card (blu notte)                */
+      --card-soft:#111827;  /* sfondo elementi interni alle card      */
+      --shadow:0 18px 40px rgba(0,0,0,.8);
       --radius:20px;
-      --accent:#284678;
+      --accent:#facc15;     /* giallo acceso per bottoni / highlight  */
+      --accent-soft:#f97316;/* arancio per dettagli secondari         */
+      --text-main:#e5e7eb;  /* testo principale chiaro                */
+      --text-muted:#9ca3af; /* testo secondario                       */
     }
+
     *{box-sizing:border-box}
     html,body{height:100%;margin:0}
-    body{background:var(--bg); font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:#1f2a37}
+    body{
+      background:
+        radial-gradient(circle at top, rgba(56,189,248,.15), transparent 55%),
+        radial-gradient(circle at bottom, rgba(244,114,182,.12), transparent 55%),
+        var(--bg);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text-main);
+    }
 
-    .wrap{max-width:1100px; margin:24px auto; padding:0 16px}
+    .wrap{
+      max-width:1100px;
+      margin:24px auto;
+      padding:0 16px 40px;
+    }
 
     /* Card generiche */
     .card{
-      background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:16px;
+      background:linear-gradient(135deg, #020617 0%, var(--card) 45%, #020617 100%);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:16px;
+      border:1px solid rgba(148,163,184,.25);
+      backdrop-filter:blur(8px);
     }
-    header.card{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 18px}
+    header.card{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:16px 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    header.card::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius:inherit;
+      padding:1px;
+      background:linear-gradient(90deg, #f97316, #facc15, #22d3ee);
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+              mask-composite:exclude;
+      opacity:.8;
+    }
+
+    header.card > *{position:relative; z-index:1;}
 
     /* Countdown */
     .countdown{display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
-    .countdown .label{font-weight:600; opacity:.8}
+    .countdown .label{font-weight:600; color:var(--text-muted);}
     .countdown .grid{display:flex; gap:10px; align-items:stretch}
-    .cd-box{display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:74px; padding:10px 12px; border-radius:14px; background:#f6f7f9; text-align:center;}
-    .cd-num{font-size:22px; font-variant-numeric:tabular-nums; font-weight:800}
-    .cd-unit{font-size:11px; opacity:.7; margin-top:2px}
+    .cd-box{
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      min-width:74px; padding:10px 12px; border-radius:14px;
+      background:var(--card-soft);
+      border:1px solid rgba(148,163,184,.4);
+      text-align:center;
+    }
+    .cd-num{font-size:22px; font-variant-numeric:tabular-nums; font-weight:800; color:var(--accent);}
+    .cd-unit{font-size:11px; opacity:.75; color:var(--text-muted); margin-top:2px}
 
     /* Layout 2 colonne */
-    .grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:18px; margin-top:18px;}
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      margin-top:18px;
+    }
     @media (max-width: 900px){ .grid{grid-template-columns: 1fr} }
 
     /* Mappa in riquadro */
-    .map-card .title{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px}
-    #map{height:62vh; border-radius:14px; overflow:hidden}
+    .map-card .title{
+      display:flex; align-items:center; justify-content:space-between; margin-bottom:10px
+    }
+    .map-card h2{color:var(--accent);}
+    #map{
+      height:62vh;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid rgba(148,163,184,.45);
+    }
     @media (max-width: 900px){ #map{height:58vh} }
 
     /* Pannello classifica */
-    #panel h2{margin:0 0 8px; font-size:18px}
-    #panel .meta{font-size:12px; opacity:.7; margin-bottom:6px}
-    #leaderboard{list-style:none; padding:0; margin:8px 0 0}
+    #panel h2{margin:0 0 8px; font-size:18px; color:var(--accent);}
+    #panel .meta{font-size:12px; color:var(--text-muted); margin-bottom:6px}
+    #leaderboard{
+      list-style:none;
+      padding:0;
+      margin:8px 0 0;
+    }
     #leaderboard li{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      padding:8px 10px; border-radius:10px; margin-bottom:6px; background:#f6f7f9;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:8px 10px;
+      border-radius:10px;
+      margin-bottom:6px;
+      background:var(--card-soft);
+      border:1px solid rgba(107,114,128,.5);
     }
     .badge{display:flex; align-items:center; gap:8px; font-weight:600}
-    .dot{width:12px; height:12px; border-radius:50%; display:inline-block; background:#555}
-    .count{font-variant-numeric:tabular-nums; font-weight:700}
+    .dot{
+      width:12px; height:12px; border-radius:50%;
+      display:inline-block;
+      background:#555;
+      box-shadow:0 0 0 2px rgba(15,23,42,.9);
+    }
+    .count{
+      font-variant-numeric:tabular-nums;
+      font-weight:700;
+      color:var(--accent-soft);
+    }
 
     .btn{
-      padding:8px 12px; border-radius:10px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600;
-      box-shadow:0 6px 18px rgba(40,70,120,.15);
+      padding:8px 12px;
+      border-radius:10px;
+      background:var(--accent);
+      color:#0b1120;
+      text-decoration:none;
+      font-weight:600;
+      box-shadow:0 6px 18px rgba(250,204,21,.4);
+      border:none;
+      cursor:pointer;
+      font-size:13px;
+    }
+    .btn:hover{
+      filter:brightness(1.05);
+      transform:translateY(-1px);
     }
 
     /* Legenda */
-    .legend{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; font-size:12px; opacity:.85}
+    .legend{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+      font-size:12px;
+      color:var(--text-muted);
+    }
     .legend span{display:flex; align-items:center; gap:6px}
 
     /* Emoji markers (Leaflet divIcon) */
     .leaflet-marker-icon.text-marker{background:transparent; border:none;}
-    .text-marker{font-size:28px; line-height:1; filter: drop-shadow(0 1px 2px rgba(0,0,0,.35));}
+    .text-marker{
+      font-size:28px;
+      line-height:1;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,.7));
+    }
 
     /* Riquadro foto */
-    #photo h2{margin:0 0 10px;font-size:18px}
+    #photo h2{margin:0 0 10px;font-size:18px; color:var(--accent);}
     .photo-wrap{display:flex;flex-direction:column;gap:8px}
     .photo-frame{
-      width:100%; aspect-ratio: 16/10; border-radius:12px; overflow:hidden; background:#eef1f4;
+      width:100%; aspect-ratio: 16/10; border-radius:12px; overflow:hidden;
+      background:radial-gradient(circle at top, rgba(56,189,248,.25), transparent 60%), #020617;
       display:flex; align-items:center; justify-content:center;
+      border:1px solid rgba(148,163,184,.4);
     }
     .photo-frame img{max-width:100%; max-height:100%; width:auto; height:auto; display:block}
-    .photo-caption{font-size:13px; opacity:.85}
+    .photo-caption{font-size:13px; color:var(--text-muted);}
     .photo-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:13px}
     .hide{display:none !important}
   </style>
@@ -94,7 +204,7 @@
           <path d="M12 2l9 4v6c0 5-4 9-9 10-5-1-9-5-9-10V6l9-4z" stroke="currentColor" stroke-width="1.5" fill="none"/>
           <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>
         </svg>
-        <h1 style="font-size:18px; margin:0">🗺️ Mappa Vico Equense</h1>
+        <h1 style="font-size:18px; margin:0">🪐 Guida galattica per vicacciatori — Mappa Vico Equense</h1>
       </div>
 
       <!-- Countdown: scadenza gioco -->
@@ -137,7 +247,7 @@
             <div class="photo-caption" id="photo-caption">Clicca un pin per vedere la foto associata.</div>
             <div class="photo-actions">
               <a id="photo-open" href="images/placeholder.svg" target="_blank" rel="noopener">Apri immagine</a>
-              <button id="photo-hide" type="button" class="btn" style="background:#6b7280">Chiudi</button>
+              <button id="photo-hide" type="button" class="btn" style="background:var(--accent-soft); color:#020617">Chiudi</button>
             </div>
           </div>
         </aside>
@@ -227,7 +337,6 @@
       });
       const marker = L.marker([p.lat, p.lng], { icon }).addTo(map);
 
-      // Popup informativo (opzionale)
       const who = p.foundBy ? `Trovato da <strong>${escapeHtml(p.foundBy)}</strong>` : `<em>Non ancora trovato</em>`;
       marker.bindPopup(
         `${p.title ? `<strong>${escapeHtml(p.title)}</strong><br>` : ''}` +
@@ -235,7 +344,6 @@
         `${who}`
       );
 
-      // Apri riquadro foto dalla cartella images/
       marker.on('click', () => showPhoto(p));
     });
 
@@ -270,7 +378,6 @@
       photoTitle.textContent = p.title ? `📸 ${p.title}` : '📸 Foto punto';
       photoCaption.textContent = p.desc ? p.desc : (p.img ? 'Immagine associata al punto.' : 'Nessuna immagine disponibile.');
       photoCard.classList.remove('hide');
-      // photoCard.scrollIntoView({behavior:'smooth', block:'nearest'}); // se vuoi lo scroll automatico su mobile
     }
 
     // ====== Render helpers ======
