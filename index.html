@@ -13,18 +13,16 @@
 
   <style>
     :root{
-      /* QUI puoi cambiare facilmente la palette per farla combaciare al manifesto */
-      --bg:#050816;         /* sfondo pagina (molto scuro, spaziale)  */
-      --card:#0b1120;       /* sfondo card (blu notte)                */
-      --card-soft:#111827;  /* sfondo elementi interni alle card      */
+      --bg:#050816;
+      --card:#0b1120;
+      --card-soft:#111827;
       --shadow:0 18px 40px rgba(0,0,0,.8);
       --radius:20px;
-      --accent:#facc15;     /* giallo acceso per bottoni / highlight  */
-      --accent-soft:#f97316;/* arancio per dettagli secondari         */
-      --text-main:#e5e7eb;  /* testo principale chiaro                */
-      --text-muted:#9ca3af; /* testo secondario                       */
+      --accent:#facc15;
+      --accent-soft:#f97316;
+      --text-main:#e5e7eb;
+      --text-muted:#9ca3af;
     }
-
     *{box-sizing:border-box}
     html,body{height:100%;margin:0}
     body{
@@ -35,14 +33,11 @@
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text-main);
     }
-
     .wrap{
       max-width:1100px;
       margin:24px auto;
       padding:0 16px 40px;
     }
-
-    /* Card generiche */
     .card{
       background:linear-gradient(135deg, #020617 0%, var(--card) 45%, #020617 100%);
       border-radius:var(--radius);
@@ -52,29 +47,19 @@
       backdrop-filter:blur(8px);
     }
     header.card{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      padding:16px 18px;
-      position:relative;
-      overflow:hidden;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding:16px 18px; position:relative; overflow:hidden;
     }
     header.card::before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      border-radius:inherit;
+      content:""; position:absolute; inset:-1px; border-radius:inherit;
       padding:1px;
       background:linear-gradient(90deg, #f97316, #facc15, #22d3ee);
       -webkit-mask:
         linear-gradient(#000 0 0) content-box,
         linear-gradient(#000 0 0);
-      -webkit-mask-composite:xor;
-              mask-composite:exclude;
+      -webkit-mask-composite:xor; mask-composite:exclude;
       opacity:.8;
     }
-
     header.card > *{position:relative; z-index:1;}
 
     /* Countdown */
@@ -82,7 +67,7 @@
     .countdown .label{font-weight:600; color:var(--text-muted);}
     .countdown .grid{display:flex; gap:10px; align-items:stretch}
     .cd-box{
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      display:flex; flex-direction:column; alignments:center; justify-content:center;
       min-width:74px; padding:10px 12px; border-radius:14px;
       background:var(--card-soft);
       border:1px solid rgba(148,163,184,.4);
@@ -93,22 +78,16 @@
 
     /* Layout 2 colonne */
     .grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:18px;
-      margin-top:18px;
+      display:grid; grid-template-columns: 1.2fr .8fr;
+      gap:18px; margin-top:18px;
     }
     @media (max-width: 900px){ .grid{grid-template-columns: 1fr} }
 
-    /* Mappa in riquadro */
-    .map-card .title{
-      display:flex; align-items:center; justify-content:space-between; margin-bottom:10px
-    }
+    /* Mappa */
+    .map-card .title{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px}
     .map-card h2{color:var(--accent);}
     #map{
-      height:62vh;
-      border-radius:14px;
-      overflow:hidden;
+      height:62vh; border-radius:14px; overflow:hidden;
       border:1px solid rgba(148,163,184,.45);
     }
     @media (max-width: 900px){ #map{height:58vh} }
@@ -116,11 +95,7 @@
     /* Pannello classifica */
     #panel h2{margin:0 0 8px; font-size:18px; color:var(--accent);}
     #panel .meta{font-size:12px; color:var(--text-muted); margin-bottom:6px}
-    #leaderboard{
-      list-style:none;
-      padding:0;
-      margin:8px 0 0;
-    }
+    #leaderboard{list-style:none; padding:0; margin:8px 0 0}
     #leaderboard li{
       display:flex;
       align-items:center;
@@ -153,33 +128,19 @@
       text-decoration:none;
       font-weight:600;
       box-shadow:0 6px 18px rgba(250,204,21,.4);
-      border:none;
-      cursor:pointer;
-      font-size:13px;
-    }
-    .btn:hover{
-      filter:brightness(1.05);
-      transform:translateY(-1px);
+      border:none; cursor:pointer; font-size:13px;
     }
 
     /* Legenda */
     .legend{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:10px;
-      font-size:12px;
-      color:var(--text-muted);
+      display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;
+      font-size:12px; color:var(--text-muted);
     }
     .legend span{display:flex; align-items:center; gap:6px}
 
     /* Emoji markers (Leaflet divIcon) */
     .leaflet-marker-icon.text-marker{background:transparent; border:none;}
-    .text-marker{
-      font-size:28px;
-      line-height:1;
-      filter: drop-shadow(0 1px 2px rgba(0,0,0,.7));
-    }
+    .text-marker{font-size:28px; line-height:1; filter: drop-shadow(0 1px 2px rgba(0,0,0,.7));}
 
     /* Riquadro foto */
     #photo h2{margin:0 0 10px;font-size:18px; color:var(--accent);}
@@ -200,14 +161,8 @@
   <div class="wrap">
     <header class="card">
       <div style="display:flex; align-items:center; gap:10px">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 2l9 4v6c0 5-4 9-9 10-5-1-9-5-9-10V6l9-4z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-          <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>
-        </svg>
         <h1 style="font-size:18px; margin:0">🪐 Guida galattica per vicacciatori — Mappa Vico Equense</h1>
       </div>
-
-      <!-- Countdown: scadenza gioco -->
       <div class="countdown" id="countdown" data-target="2026-01-01T00:00:00+01:00">
         <span class="label">⏳ Scadenza tra:</span>
         <div class="grid">
@@ -220,7 +175,7 @@
     </header>
 
     <div class="grid">
-      <!-- Colonna sinistra: MAPPA -->
+      <!-- Colonna sinistra: mappa -->
       <section class="card map-card">
         <div class="title">
           <h2 style="margin:0;font-size:16px">🗺️ Mappa</h2>
@@ -229,7 +184,7 @@
         <div id="map"></div>
       </section>
 
-      <!-- Colonna destra: CLASSIFICA + LEGENDA + FOTO -->
+      <!-- Colonna destra: classifica + foto -->
       <div class="side" style="display:flex; flex-direction:column; gap:18px">
         <aside class="card" id="panel">
           <h2>🏆 Classifica</h2>
@@ -257,7 +212,8 @@
 
   <!-- Leaflet JS -->
   <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
 
   <script>
   // ===== COUNTDOWN =====
@@ -273,7 +229,11 @@
     function tick(){
       const diff = target - new Date();
       if (isNaN(target.getTime())) { daysEl.textContent = hrsEl.textContent = minEl.textContent = secEl.textContent = '--'; return; }
-      if (diff <= 0) { daysEl.textContent = hrsEl.textContent = minEl.textContent = secEl.textContent = '00'; el.querySelector('.label').textContent = 'Tempo scaduto!'; return; }
+      if (diff <= 0) {
+        daysEl.textContent = hrsEl.textContent = minEl.textContent = secEl.textContent = '00';
+        el.querySelector('.label').textContent = 'Tempo scaduto!';
+        return;
+      }
       const d = Math.floor(diff/86400000);
       const h = Math.floor((diff%86400000)/3600000);
       const m = Math.floor((diff%3600000)/60000);
@@ -291,7 +251,7 @@
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
-    // ===== TEAM DATA (colori + emoji + label belli) =====
+    // ===== TEAM DATA (colori + emoji) =====
     const TEAM_LIST = [
       { name: 'Juventude Bonea', color: '#e74c3c', emoji: '☢️' },
       { name: 'Assi',            color: '#2980b9', emoji: '🃏' },
@@ -305,29 +265,24 @@
     ];
     const TEAM_COLORS = Object.fromEntries(TEAM_LIST.map(t => [t.name.toLowerCase(), t.color]));
     const TEAM_EMOJIS = Object.fromEntries(TEAM_LIST.map(t => [t.name.toLowerCase(), t.emoji]));
-    const TEAM_NAME   = Object.fromEntries(TEAM_LIST.map(t => [t.name.toLowerCase(), t.name])); // pretty name
+    const TEAM_NAME   = Object.fromEntries(TEAM_LIST.map(t => [t.name.toLowerCase(), t.name]));
 
-    function teamColor(name){
-      if(!name) return null;
-      const key = String(name).trim().toLowerCase();
-      return TEAM_COLORS[key] || null;
-    }
     function teamEmoji(name){
       if(!name) return '📍';
       const key = String(name).trim().toLowerCase();
       return TEAM_EMOJIS[key] || '📍';
     }
 
-    // ====== Carica PIN ======
+    // ===== Carica PIN =====
     let pins = [];
-    try {
+    try{
       const res = await fetch('pins.json?ts=' + Date.now(), { cache: 'no-store' });
       pins = await res.json();
-    } catch (e) {
+    }catch(e){
       console.error('Errore nel caricare pins.json', e);
     }
 
-    // ====== Marker emoji + click per riquadro foto ======
+    // ===== Marker emoji + click per foto =====
     pins.forEach(p => {
       const icon = L.divIcon({
         className: 'text-marker',
@@ -347,11 +302,11 @@
       marker.on('click', () => showPhoto(p));
     });
 
-    // ===== CLASSIFICA =====
-    const totals = {}; // team -> count
+    // ===== Classifica =====
+    const totals = {};
     let foundCount = 0;
     pins.forEach(p => {
-      if (p.foundBy) {
+      if(p.foundBy){
         foundCount++;
         const t = String(p.foundBy).trim().toLowerCase();
         totals[t] = (totals[t] || 0) + 1;
@@ -362,7 +317,7 @@
     renderLeaderboard(totals);
     renderLegend();
 
-    // ====== Riquadro foto ======
+    // ===== Riquadro foto =====
     const photoCard = document.getElementById('photo');
     const photoImg = document.getElementById('photo-img');
     const photoTitle = document.getElementById('photo-title');
@@ -380,7 +335,7 @@
       photoCard.classList.remove('hide');
     }
 
-    // ====== Render helpers ======
+    // ===== Helpers =====
     function renderSummary(found, total){
       document.getElementById('summary').textContent = `Trovati: ${found} / ${total}`;
     }
@@ -401,7 +356,7 @@
       const items = Object.entries(counts)
         .map(([team, count]) => ({team, count}))
         .sort((a,b) => b.count - a.count || a.team.localeCompare(b.team, 'it'));
-      if (items.length === 0) {
+      if(items.length === 0){
         const li = document.createElement('li');
         li.textContent = 'Nessun ritrovamento registrato';
         list.appendChild(li);
