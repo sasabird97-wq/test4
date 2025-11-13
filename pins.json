@@ -1,38 +1,13 @@
 [
-  {
-    "id": 1,
-    "lat": 40.6607,
-    "lng": 14.4159,
-    "title": "Piazza Umberto I",
-    "desc": "Punto d’incontro",
-    "foundBy": "Juventude Bonea",
-    "img": "images/p1.jpg"
-  },
-  {
-    "id": 2,
-    "lat": 40.6579,
-    "lng": 14.4274,
-    "title": "Marina di Vico",
-    "desc": "Vista mare",
-    "foundBy": "Assi",
-    "img": "images/p2.jpg"
-  },
-  {
-    "id": 3,
-    "lat": 40.6609,
-    "lng": 14.4146,
-    "title": "Chiesa SS. Annunziata",
-    "desc": "Indizio #3",
-    "foundBy": null,
-    "img": ""
-  },
-  {
-    "id": 4,
-    "lat": 40.6547,
-    "lng": 14.4152,
-    "title": "San Vito Belvedere",
-    "desc": "Checkpoint",
-    "foundBy": "Volpi Del Faito",
-    "img": "images/p4.jpg"
-  }
+{
+  "id": 1,
+  "lat": 40.6607,
+  "lng": 14.4159,
+  "title": "Piazza Umberto I",
+  "desc": "Punto d’incontro",
+  "foundBy": "Juventude Bonea",
+  "img": "images/p1.jpg",
+  "foto": "si"
+}
+
 ]
