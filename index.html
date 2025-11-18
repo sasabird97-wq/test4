@@ -151,12 +151,37 @@
   align-items:center;
   justify-content:center;
   flex-direction:column;
-  background:radial-gradient(circle at top,#1e293b,#020617 60%);
+  padding:16px;
   font-family:system-ui,sans-serif;
   color:#e5e7eb;
   text-align:center;
-  padding:16px;
+
+  /* sfondo più galattico */
+  background:
+    radial-gradient(circle at 10% 0%, rgba(94,234,212,0.16), transparent 55%),
+    radial-gradient(circle at 80% 0%, rgba(129,140,248,0.25), transparent 60%),
+    radial-gradient(circle at 20% 100%, rgba(236,72,153,0.20), transparent 55%),
+    radial-gradient(circle at 90% 80%, rgba(59,130,246,0.18), transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(15,23,42,0.95), #000);
 }
+
+/* stelline sullo sfondo dell'overlay */
+#susp-overlay::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,0.7) 0, transparent 50%),
+    radial-gradient(1.5px 1.5px at 30% 80%, rgba(248,250,252,0.6) 0, transparent 50%),
+    radial-gradient(1.8px 1.8px at 70% 30%, rgba(248,250,252,0.55) 0, transparent 50%),
+    radial-gradient(1.4px 1.4px at 85% 60%, rgba(255,255,255,0.55) 0, transparent 50%),
+    radial-gradient(1.2px 1.2px at 45% 10%, rgba(248,250,252,0.45) 0, transparent 50%),
+    radial-gradient(1.2px 1.2px at 60% 90%, rgba(255,255,255,0.4) 0, transparent 50%);
+  opacity:0.7;
+  z-index:-1;
+}
+
   #susp-overlay .logo-overlay{
   max-width:220px;   /* regola a piacere */
   width:60%;
