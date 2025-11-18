@@ -142,73 +142,112 @@
     .photo-caption{font-size:13px; color:var(--text-muted);}
     .photo-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:13px}
     .hide{display:none !important}
-  /* Overlay "DON'T PANIC" – versione super galattica */
-#susp-overlay{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  padding:16px;
-  font-family:system-ui,sans-serif;
-  color:#e5e7eb;
-  text-align:center;
 
-  /* sfondo completamente opaco e spaziale */
-  background:
-    radial-gradient(circle at 15% 0%, #0b1120 0, #020014 45%, #020010 70%),
-    radial-gradient(circle at 80% 20%, #111827 0, #020010 65%),
-    radial-gradient(circle at 20% 100%, #020010 0, #000 70%);
-  background-color:#020010;
-  overflow:hidden;
-}
+    /* Overlay "DON'T PANIC" – versione super galattica */
+    #susp-overlay{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      padding:16px;
+      font-family:system-ui,sans-serif;
+      color:#e5e7eb;
+      text-align:center;
+      background:
+        radial-gradient(circle at 15% 0%, #0b1120 0, #020014 45%, #020010 70%),
+        radial-gradient(circle at 80% 20%, #111827 0, #020010 65%),
+        radial-gradient(circle at 20% 100%, #020010 0, #000 70%);
+      background-color:#020010;
+      overflow:hidden;
+    }
 
-/* primo strato di stelle */
-#susp-overlay::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background-image:
-    radial-gradient(2px 2px at 5% 15%, rgba(255,255,255,0.9) 0, transparent 55%),
-    radial-gradient(2px 2px at 20% 70%, rgba(248,250,252,0.8) 0, transparent 55%),
-    radial-gradient(2px 2px at 40% 30%, rgba(248,250,252,0.75) 0, transparent 55%),
-    radial-gradient(2px 2px at 60% 80%, rgba(255,255,255,0.85) 0, transparent 55%),
-    radial-gradient(2px 2px at 80% 40%, rgba(248,250,252,0.8) 0, transparent 55%),
-    radial-gradient(2px 2px at 90% 75%, rgba(255,255,255,0.9) 0, transparent 55%);
-  opacity:0.9;
-  z-index:-1;
-}
+    /* stelle */
+    #susp-overlay::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        radial-gradient(2px 2px at 5% 15%, rgba(255,255,255,0.9) 0, transparent 55%),
+        radial-gradient(2px 2px at 20% 70%, rgba(248,250,252,0.8) 0, transparent 55%),
+        radial-gradient(2px 2px at 40% 30%, rgba(248,250,252,0.75) 0, transparent 55%),
+        radial-gradient(2px 2px at 60% 80%, rgba(255,255,255,0.85) 0, transparent 55%),
+        radial-gradient(2px 2px at 80% 40%, rgba(248,250,252,0.8) 0, transparent 55%),
+        radial-gradient(2px 2px at 90% 75%, rgba(255,255,255,0.9) 0, transparent 55%);
+      opacity:0.9;
+      z-index:-1;
+    }
+    #susp-overlay::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        radial-gradient(1.3px 1.3px at 12% 25%, rgba(255,255,255,0.8) 0, transparent 55%),
+        radial-gradient(1.3px 1.3px at 28% 15%, rgba(248,250,252,0.7) 0, transparent 55%),
+        radial-gradient(1.3px 1.3px at 35% 85%, rgba(255,255,255,0.75) 0, transparent 55%),
+        radial-gradient(1.3px 1.3px at 52% 60%, rgba(248,250,252,0.8) 0, transparent 55%),
+        radial-gradient(1.3px 1.3px at 68% 30%, rgba(255,255,255,0.75) 0, transparent 55%),
+        radial-gradient(1.3px 1.3px at 78% 90%, rgba(248,250,252,0.8) 0, transparent 55%),
+        radial-gradient(1.3px 1.3px at 92% 50%, rgba(255,255,255,0.85) 0, transparent 55%);
+      opacity:0.9;
+      z-index:-1;
+    }
 
-/* secondo strato di stelline più piccole e fitte */
-#susp-overlay::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background-image:
-    radial-gradient(1.3px 1.3px at 12% 25%, rgba(255,255,255,0.8) 0, transparent 55%),
-    radial-gradient(1.3px 1.3px at 28% 15%, rgba(248,250,252,0.7) 0, transparent 55%),
-    radial-gradient(1.3px 1.3px at 35% 85%, rgba(255,255,255,0.75) 0, transparent 55%),
-    radial-gradient(1.3px 1.3px at 52% 60%, rgba(248,250,252,0.8) 0, transparent 55%),
-    radial-gradient(1.3px 1.3px at 68% 30%, rgba(255,255,255,0.75) 0, transparent 55%),
-    radial-gradient(1.3px 1.3px at 78% 90%, rgba(248,250,252,0.8) 0, transparent 55%),
-    radial-gradient(1.3px 1.3px at 92% 50%, rgba(255,255,255,0.85) 0, transparent 55%);
-  opacity:0.9;
-  z-index:-1;
-}
+    /* logo nell'overlay */
+    #susp-overlay .logo-overlay{
+      max-width:220px;
+      width:60%;
+      margin-bottom:16px;
+      filter:drop-shadow(0 0 10px rgba(15,23,42,.9));
+    }
 
-  </style> 
-  
+    /* testo overlay */
+    #susp-overlay .title{
+      font-size:34px;
+      font-weight:900;
+      letter-spacing:3px;
+      color:#facc15;
+      text-shadow:0 0 14px rgba(250,204,21,.9);
+      margin-bottom:4px;
+    }
+    #susp-overlay .subtitle{
+      font-size:16px;
+      color:#f97316;
+      margin-bottom:16px;
+      text-transform:uppercase;
+      letter-spacing:2px;
+    }
+    #susp-overlay .card{
+      max-width:520px;
+      width:90%;
+      background:rgba(15,23,42,.95);
+      padding:18px 20px;
+      border-radius:16px;
+      border:1px solid rgba(148,163,184,.6);
+      box-shadow:0 0 22px rgba(30,64,175,.7);
+    }
+    #susp-overlay .code{
+      font-family:"Fira Code",monospace;
+      color:#f97316;
+      margin-bottom:8px;
+    }
+    #susp-overlay .card p{
+      margin:4px 0;
+      font-size:14px;
+      line-height:1.6;
+    }
+  </style>
 </head>
 <body>
 
   <div id="susp-overlay">
-      <img src="images/logo.png"
-       alt="Logo Caccia alle Capsule"
-       class="logo-overlay">
+    <img src="images/logo.png"
+         alt="Logo Caccia alle Capsule"
+         class="logo-overlay">
     <div class="title">DON'T PANIC</div>
     <div class="subtitle">Fluttuazioni spazio-temporali in corso</div>
 
@@ -221,18 +260,13 @@
   </div>
 
   <div class="wrap">
-    <!-- qui continua TUTTO il tuo HTML attuale (header, mappa, classifica, ecc.) -->
-
-  <div class="wrap">
     <header class="card">
       <div style="display:flex; align-items:center; gap:10px">
         <h1 style="font-size:18px; margin:0">🪐 Guida galattica per Vicacciatori — Caccia alle capsule </h1>
       </div>
-      <!-- Timer rimosso -->
     </header>
 
     <div class="grid">
-      <!-- Colonna sinistra: mappa -->
       <section class="card map-card">
         <div class="title">
           <h2 style="margin:0;font-size:16px">🗺️ Mappa</h2>
@@ -241,7 +275,6 @@
         <div id="map"></div>
       </section>
 
-      <!-- Colonna destra: classifica + foto -->
       <div class="side" style="display:flex; flex-direction:column; gap:18px">
         <aside class="card" id="panel">
           <h2>🏆 Classifica</h2>
@@ -274,14 +307,12 @@
 
   <script>
   document.addEventListener('DOMContentLoaded', async () => {
-    // ===== MAPPA =====
     const map = L.map('map').setView([40.660, 14.420], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
-    // ===== TEAM DATA (colori + emoji) =====
     const TEAM_LIST = [
       { name: 'Juventude Bonea', color: '#e74c3c', emoji: '☢️' },
       { name: 'Assi',            color: '#2980b9', emoji: '🃏' },
@@ -303,7 +334,6 @@
       return TEAM_EMOJIS[key] || '📍';
     }
 
-    // ===== Carica PIN =====
     let pins = [];
     try{
       const res = await fetch('pins.json?ts=' + Date.now(), { cache: 'no-store' });
@@ -312,7 +342,6 @@
       console.error('Errore nel caricare pins.json', e);
     }
 
-    // ===== Marker emoji + click per foto =====
     pins.forEach(p => {
       const icon = L.divIcon({
         className: 'text-marker',
@@ -332,8 +361,8 @@
       marker.on('click', () => showPhoto(p));
     });
 
-    const stats = {};   // teamKey -> {capsule, foto, punti}
-    let foundCount = 0; // capsule totali trovate
+    const stats = {};
+    let foundCount = 0;
 
     function hasFotoBonus(p){
       const v = (p.foto || '').toString().trim().toLowerCase();
@@ -343,17 +372,14 @@
     pins.forEach(p => {
       if (p.foundBy) {
         foundCount++;
-
         const key = String(p.foundBy).trim().toLowerCase();
 
         if (!stats[key]) {
           stats[key] = { capsule: 0, foto: 0, punti: 0 };
         }
 
-        // 1 punto per la capsula trovata
         stats[key].capsule += 1;
 
-        // +1 se hanno fatto la foto
         if (hasFotoBonus(p)) {
           stats[key].foto += 1;
         }
@@ -366,7 +392,6 @@
     renderLeaderboard(stats);
     renderLegend();
 
-    // ===== Riquadro foto =====
     const photoCard = document.getElementById('photo');
     const photoImg = document.getElementById('photo-img');
     const photoTitle = document.getElementById('photo-title');
@@ -384,7 +409,6 @@
       photoCard.classList.remove('hide');
     }
 
-    // ===== Helpers =====
     function renderSummary(found, total){
       document.getElementById('summary').textContent = `Capsule trovate: ${found} / ${total}`;
     }
@@ -451,3 +475,4 @@
   </script>
 </body>
 </html>
+
